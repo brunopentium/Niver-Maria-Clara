@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aniversário da Maria Clara</title>
+
+  <style>
+    :root {
+      --pink: #ff2f7d;
+      --pink-soft: #ffe4ef;
+      --pink-light: #fff3f8;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --white: #ffffff;
+      --shadow: 0 18px 45px rgba(255, 47, 125, .20);
+      --radius: 28px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255, 182, 211, .55), transparent 32%),
+        linear-gradient(180deg, #fff7fb 0%, #fff 45%, #fff5f9 100%);
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topbar {
+      position: fixed;
+      z-index: 50;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1120px, calc(100% - 28px));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .78);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.10);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      color: var(--pink);
+      white-space: nowrap;
+    }
+
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--pink-soft);
+      font-size: 24px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-weight: 700;
+      font-size: 14px;
+      color: #374151;
+    }
+
+    .nav a:hover {
+      color: var(--pink);
+    }
+
+    .top-button,
+    .primary-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: none;
+      cursor: pointer;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ff5fa2, #ff2f7d);
+      color: white;
+      font-weight: 900;
+      box-shadow: 0 12px 28px rgba(255, 47, 125, .35);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .top-button {
+      padding: 13px 20px;
+      font-size: 14px;
+    }
+
+    .primary-button {
+      padding: 17px 24px;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    .top-button:hover,
+    .primary-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 34px rgba(255, 47, 125, .42);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 760px;
+      display: flex;
+      align-items: center;
+      background-image:
+        linear-gradient(90deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,.42) 32%, rgba(0,0,0,.08) 62%, rgba(0,0,0,.05) 100%),
+        url("banner-maria-clara.png");
+      background-size: cover;
+      background-position: center 38%;
+      color: white;
+      padding: 140px 24px 130px;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: -6%;
+      right: -6%;
+      bottom: -58px;
+      height: 130px;
+      background: white;
+      border-radius: 50% 50% 0 0 / 55% 55% 0 0;
+      transform: rotate(-2deg);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      max-width: 560px;
+      margin-left: max(24px, calc((100vw - 1120px) / 2));
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.18);
+      backdrop-filter: blur(10px);
+      font-weight: 900;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 7vw, 86px);
+      line-height: .95;
+      letter-spacing: -2px;
+      text-shadow: 0 5px 18px rgba(0,0,0,.35);
+    }
+
+    h1 span {
+      display: block;
+      color: #ff8fbd;
+      text-shadow: 0 5px 0 rgba(90, 28, 50, .35);
+    }
+
+    .hero p {
+      margin: 26px 0 30px;
+      font-size: clamp(17px, 2vw, 22px);
+      line-height: 1.5;
+      font-weight: 700;
+      text-shadow: 0 4px 14px rgba(0,0,0,.35);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .secondary-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 56px;
+      padding: 0 24px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.92);
+      color: #1f2937;
+      font-weight: 900;
+      box-shadow: 0 12px 25px rgba(0,0,0,.12);
+    }
+
+    .section {
+      position: relative;
+      z-index: 5;
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .info-strip {
+      margin-top: -44px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      background: white;
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 24px;
+      border-right: 1px solid #ffe1ec;
+    }
+
+    .info-item:last-child {
+      border-right: none;
+    }
+
+    .info-icon {
+      width: 56px;
+      height: 56px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 56px;
+      border-radius: 18px;
+      background: var(--pink-soft);
+      color: var(--pink);
+      font-size: 28px;
+    }
+
+    .info-item small {
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .info-item strong {
+      display: block;
+      margin-top: 5px;
+      font-size: 16px;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 42px;
+      align-items: center;
+      padding: 70px 0 40px;
+    }
+
+    .copy-card {
+      padding: 10px;
+    }
+
+    .eyebrow {
+      color: var(--pink);
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: clamp(34px, 5vw, 54px);
+      line-height: 1.05;
+      letter-spacing: -1.2px;
+      color: #111827;
+      margin-bottom: 18px;
+    }
+
+    .copy-card p {
+      color: #4b5563;
+      font-size: 17px;
+      line-height: 1.7;
+      margin-bottom: 26px;
+    }
+
+    .benefit {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 18px 0;
+      color: #4b5563;
+      font-weight: 700;
+    }
+
+    .benefit span {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--pink-soft);
+      color: var(--pink);
+      flex: 0 0 42px;
+    }
+
+
+    .choice-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .choice-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 74px;
+      padding: 16px;
+      border: 2px solid #ffd0df;
+      border-radius: 18px;
+      background: #fff;
+      cursor: pointer;
+      transition: transform .2s ease, border .2s ease, box-shadow .2s ease, background .2s ease;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+
+    .choice-card input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .choice-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--pink-soft);
+      color: var(--pink);
+      flex: 0 0 42px;
+      font-size: 22px;
+    }
+
+    .choice-card small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .choice-card:has(input:checked) {
+      border-color: var(--pink);
+      background: linear-gradient(135deg, #fff, #fff0f6);
+      box-shadow: 0 12px 28px rgba(255, 47, 125, .18);
+      transform: translateY(-2px);
+    }
+
+    .choice-card:has(input:checked)::after {
+      content: "✓";
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      width: 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--pink);
+      color: white;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .form-card {
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(255, 47, 125, .12);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    .form-card h3 {
+      text-align: center;
+      color: var(--pink);
+      font-size: 30px;
+      margin-bottom: 24px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      font-weight: 900;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid #ffd0df;
+      background: #fff;
+      border-radius: 16px;
+      padding: 15px 16px;
+      font-size: 15px;
+      outline: none;
+      transition: border .2s ease, box-shadow .2s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--pink);
+      box-shadow: 0 0 0 4px rgba(255,47,125,.12);
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .counter {
+      display: grid;
+      grid-template-columns: 58px 1fr 58px;
+      border: 1px solid #ffd0df;
+      border-radius: 16px;
+      overflow: hidden;
+      background: white;
+    }
+
+    .counter button {
+      border: none;
+      background: var(--pink-light);
+      color: var(--pink);
+      font-size: 28px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .counter input {
+      border: none;
+      border-radius: 0;
+      text-align: center;
+      font-weight: 900;
+    }
+
+    .notice {
+      margin-top: 18px;
+      text-align: center;
+      color: #6b7280;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .msg {
+      display: none;
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 16px;
+      text-align: center;
+      font-weight: 900;
+    }
+
+    .ok {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .erro {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .location {
+      margin: 10px auto 60px;
+      padding: 24px;
+      border-radius: 26px;
+      background: white;
+      box-shadow: 0 15px 35px rgba(0,0,0,.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border: 1px solid #ffe1ec;
+    }
+
+    .location-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .pin {
+      width: 62px;
+      height: 62px;
+      display: grid;
+      place-items: center;
+      border-radius: 22px;
+      background: var(--pink-soft);
+      color: var(--pink);
+      font-size: 30px;
+      flex: 0 0 62px;
+    }
+
+    .map-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 22px;
+      border-radius: 999px;
+      background: var(--pink-soft);
+      color: var(--pink);
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px 42px;
+      color: #6b7280;
+      font-weight: 700;
+    }
+
+    .floating-heart {
+      position: absolute;
+      z-index: 3;
+      color: #ff8fbd;
+      font-size: 34px;
+      animation: float 4s ease-in-out infinite;
+      opacity: .95;
+    }
+
+    .h1 { top: 20%; left: 43%; }
+    .h2 { top: 33%; left: 4%; animation-delay: 1s; }
+    .h3 { top: 72%; right: 8%; animation-delay: 1.7s; }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0) rotate(-8deg); }
+      50% { transform: translateY(-14px) rotate(6deg); }
+    }
+
+    @media (max-width: 900px) {
+      .topbar {
+        top: 10px;
+        border-radius: 24px;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .brand {
+        font-size: 15px;
+      }
+
+      .top-button {
+        padding: 12px 14px;
+        font-size: 13px;
+      }
+
+      .hero {
+        min-height: 720px;
+        align-items: flex-end;
+        padding: 120px 18px 110px;
+        background-image:
+          linear-gradient(180deg, rgba(0,0,0,.08) 0%, rgba(0,0,0,.25) 45%, rgba(0,0,0,.72) 100%),
+          url("banner-maria-clara.png");
+        background-position: 56% 34%;
+      }
+
+      .hero-content {
+        max-width: 100%;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .floating-heart {
+        display: none;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .info-strip {
+        grid-template-columns: 1fr 1fr;
+        margin-top: -32px;
+      }
+
+      .info-item {
+        border-right: none;
+        border-bottom: 1px solid #ffe1ec;
+        padding: 18px;
+      }
+
+      .main-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding-top: 46px;
+      }
+
+      .copy-card {
+        text-align: center;
+      }
+
+      .benefit {
+        text-align: left;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .choice-group {
+        grid-template-columns: 1fr;
+      }
+
+      .location {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .location-left {
+        align-items: flex-start;
+      }
+
+      .map-button {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .topbar {
+        width: calc(100% - 18px);
+        padding: 10px;
+      }
+
+      .brand span {
+        display: none;
+      }
+
+      .top-button {
+        min-width: 0;
+      }
+
+      .hero {
+        min-height: 690px;
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .badge {
+        font-size: 14px;
+      }
+
+      h1 {
+        font-size: 42px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .hero-actions a {
+        width: 100%;
+      }
+
+      .info-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .info-item {
+        border-bottom: 1px solid #ffe1ec;
+      }
+
+  
+    .choice-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .choice-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 74px;
+      padding: 16px;
+      border: 2px solid #ffd0df;
+      border-radius: 18px;
+      background: #fff;
+      cursor: pointer;
+      transition: transform .2s ease, border .2s ease, box-shadow .2s ease, background .2s ease;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+
+    .choice-card input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .choice-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--pink-soft);
+      color: var(--pink);
+      flex: 0 0 42px;
+      font-size: 22px;
+    }
+
+    .choice-card small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .choice-card:has(input:checked) {
+      border-color: var(--pink);
+      background: linear-gradient(135deg, #fff, #fff0f6);
+      box-shadow: 0 12px 28px rgba(255, 47, 125, .18);
+      transform: translateY(-2px);
+    }
+
+    .choice-card:has(input:checked)::after {
+      content: "✓";
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      width: 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--pink);
+      color: white;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .form-card {
+        padding: 22px;
+        border-radius: 22px;
+      }
+
+      .form-card h3 {
+        font-size: 25px;
+      }
+
+      .section {
+        width: min(100% - 20px, 1120px);
+      }
+
+      .location-left {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <a class="brand" href="#inicio">
+      <span class="brand-icon">🎂</span>
+      <span>Maria Clara • 3 anos</span>
+    </a>
+
+    <nav class="nav">
+      <a href="#inicio">Início</a>
+      <a href="#sobre">Sobre a festa</a>
+      <a href="#confirmar">Confirmar presença</a>
+      <a href="#localizacao">Localização</a>
+    </nav>
+
+    <a class="top-button" href="#confirmar">♡ Confirmar presença</a>
+  </header>
+
+  <section class="hero" id="inicio">
+    <div class="floating-heart h1">♡</div>
+    <div class="floating-heart h2">✧</div>
+    <div class="floating-heart h3">♡</div>
+
+    <div class="hero-content">
+      <div class="badge">🎉 Vem comemorar comigo!</div>
+      <h1>Aniversário da <span>Maria Clara!</span></h1>
+      <p>Será uma tarde cheia de alegria, brincadeiras, doces e momentos inesquecíveis!</p>
+
+      <div class="hero-actions">
+        <a class="top-button" href="#confirmar">♡ Confirmar presença</a>
+        <a class="secondary-button" href="#sobre">Sobre a festa</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="sobre">
+    <div class="info-strip">
+      <div class="info-item">
+        <div class="info-icon">📅</div>
+        <div>
+          <small>Data</small>
+          <strong>09 de julho de 2024</strong>
+          <small>Terça-feira</small>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon">🕐</div>
+        <div>
+          <small>Horário</small>
+          <strong>Às 13h</strong>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon">🎁</div>
+        <div>
+          <small>Idade</small>
+          <strong>3 aninhos</strong>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon">🐾</div>
+        <div>
+          <small>Tema</small>
+          <strong>Patrulha Canina</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-grid" id="confirmar">
+      <div class="copy-card">
+        <div class="eyebrow">Confirme sua presença</div>
+        <h2>Sua presença é muito importante! 💕</h2>
+        <p>Preencha o formulário para confirmar sua presença. Assim conseguimos preparar tudo com muito carinho para receber você.</p>
+
+        <div class="benefit"><span>💗</span> Assim podemos organizar a festa com muito carinho.</div>
+        <div class="benefit"><span>🎁</span> Contamos com você para tornar esse dia ainda mais especial.</div>
+        <div class="benefit"><span>⭐</span> Sua presença fará toda a diferença!</div>
+      </div>
+
+      <form class="form-card" id="rsvpForm">
+        <h3>♡ Confirme sua presença</h3>
+
+        <div class="form-grid">
+          <div>
+            <label for="nome">Nome completo *</label>
+            <input id="nome" name="nome" required placeholder="Digite seu nome completo" />
+          </div>
+
+          <div class="full">
+            <label>Você poderá participar? *</label>
+            <div class="choice-group">
+              <label class="choice-card">
+                <input type="radio" name="presenca" value="Sim, vou participar" required />
+                <span class="choice-icon">🎉</span>
+                <span>
+                  Sim, vou participar!
+                  <small>Confirmar minha presença</small>
+                </span>
+              </label>
+
+              <label class="choice-card">
+                <input type="radio" name="presenca" value="Agradeço muito o convite, mas não conseguirei participar" required />
+                <span class="choice-icon">💕</span>
+                <span>
+                  Agradeço muito o convite, mas não conseguirei participar
+                  <small>Enviar resposta com carinho</small>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <label for="acompanhantes">Quantidade de acompanhantes</label>
+            <div class="counter">
+              <button type="button" id="menos">−</button>
+              <input id="acompanhantes" name="acompanhantes" type="number" min="0" value="0" readonly />
+              <button type="button" id="mais">+</button>
+            </div>
+          </div>
+
+          <div>
+            <label for="telefone">Telefone / WhatsApp</label>
+            <input id="telefone" name="telefone" placeholder="Opcional" />
+          </div>
+
+          <div class="full">
+            <label for="observacao">Observações</label>
+            <textarea id="observacao" name="observacao" placeholder="Alguma observação?"></textarea>
+          </div>
+
+          <div class="full">
+            <button class="primary-button" id="btn" type="submit">♡ Confirmar presença</button>
+            <div class="notice">🔒 Suas informações serão usadas apenas para organizar esta festa.</div>
+            <div id="msgOk" class="msg ok">Resposta enviada com sucesso! 💕</div>
+            <div id="msgErro" class="msg erro">Não foi possível enviar. Tente novamente.</div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="location" id="localizacao">
+      <div class="location-left">
+        <div class="pin">📍</div>
+        <div>
+          <strong>Local da festa</strong>
+          <p>Buffet New Balloon - R. Maestro Isaías Belcufiné, 6 - Vila Ianni - Itu/SP</p>
+        </div>
+      </div>
+
+      <a class="map-button" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Buffet%20New%20Balloon%20R.%20Maestro%20Isa%C3%ADas%20Belcufin%C3%A9%206%20Vila%20Ianni%20Itu%20SP">
+        Ver no mapa
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    Feito com carinho para o aniversário da Maria Clara 💕
+  </footer>
+
+  <script>
+    // Cole aqui a URL do Web App do Google Apps Script, mantendo as aspas.
+    // Exemplo: const SCRIPT_URL = "https://script.google.com/macros/s/SEU_ID/exec";
+    const SCRIPT_URL = "COLE_AQUI_A_URL_DO_APPS_SCRIPT";
+
+    const form = document.getElementById("rsvpForm");
+    const btn = document.getElementById("btn");
+    const msgOk = document.getElementById("msgOk");
+    const msgErro = document.getElementById("msgErro");
+    const acompanhantes = document.getElementById("acompanhantes");
+
+    document.getElementById("mais").addEventListener("click", () => {
+      acompanhantes.value = Number(acompanhantes.value || 0) + 1;
+    });
+
+    document.getElementById("menos").addEventListener("click", () => {
+      acompanhantes.value = Math.max(0, Number(acompanhantes.value || 0) - 1);
+    });
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      msgOk.style.display = "none";
+      msgErro.style.display = "none";
+
+      if (!SCRIPT_URL || SCRIPT_URL.includes("COLE_AQUI")) {
+        alert("Configure a URL do Apps Script no arquivo index.html.");
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = "Enviando...";
+
+      const dados = Object.fromEntries(new FormData(form).entries());
+      const body = new URLSearchParams(dados);
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          body
+        });
+
+        if ((dados.presenca || "").toLowerCase().includes("não")) {
+          msgOk.textContent = "Resposta enviada com sucesso. Obrigado por avisar com carinho 💕";
+        } else {
+          msgOk.textContent = "Presença confirmada com sucesso! Estamos te esperando 💕";
+        }
+
+        msgOk.style.display = "block";
+        form.reset();
+        acompanhantes.value = 0;
+      } catch (err) {
+        msgErro.style.display = "block";
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "♡ Confirmar presença";
+      }
+    });
+  </script>
+</body>
+</html>
